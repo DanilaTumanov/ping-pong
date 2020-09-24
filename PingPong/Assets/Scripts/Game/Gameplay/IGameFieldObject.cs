@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Gameplay;
 using UnityEngine;
 
-public interface IGameFieldObject : IBouncable
+public interface IGameFieldObject : IBouncable, IBoundedObject
 {
-
-    Vector3 Position { get; }
-    Bounds Bounds { get; }
-    
+   
     void OnOut();
     void OnGameFieldReset();
 

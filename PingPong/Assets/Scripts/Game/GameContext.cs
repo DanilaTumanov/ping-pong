@@ -5,6 +5,7 @@ using Game.Mediators;
 using Game.Services.InputService;
 using Game.Services.RuntimeService;
 using Game.Signals;
+using Game.Views;
 using strange.extensions.context.api;
 using strange.extensions.context.impl;
 using UnityEngine;
@@ -45,6 +46,7 @@ public class GameContext : MVCSContext
         // View
         mediationBinder.Bind<AppView>().To<AppMediator>();
         mediationBinder.Bind<GameplayView>().To<GameplayMediator>();
+        mediationBinder.Bind<PlayerView>().To<PlayerMediator>();
         
         
         // Start command

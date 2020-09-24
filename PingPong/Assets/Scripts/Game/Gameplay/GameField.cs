@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Views;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -8,9 +9,11 @@ namespace Game.Gameplay
     
     [ExecuteInEditMode]
     [DisallowMultipleComponent]
-    public class GameField : MonoBehaviour
+    public class GameField : MonoBehaviour, IRestrictedArea
     {
         [SerializeField] private BoundsPairs _bounceBounds;
+
+        [SerializeField] private float _playerOffset;
 
         private Camera _camera;
 
@@ -18,6 +21,7 @@ namespace Game.Gameplay
 
 
         public Bounds Bounds { get; private set; }
+
         public BoundsPairs BounceBounds => _bounceBounds;
 
 
@@ -49,24 +53,26 @@ namespace Game.Gameplay
 
         private void Process(IGameFieldObject gameFieldObject)
         {
-            if (gameFieldObject.Position.x - gameFieldObject.Bounds.extents.x < Bounds.min.x
-             || gameFieldObject.Position.x + gameFieldObject.Bounds.extents.x > Bounds.max.x)
+            var gfoPosition = gameFieldObject.Transform.position;
+            
+            if (gfoPosition.x - gameFieldObject.Bounds.extents.x < Bounds.min.x
+             || gfoPosition.x + gameFieldObject.Bounds.extents.x > Bounds.max.x)
             {
                 if (_bounceBounds == BoundsPairs.LeftRight)
                 {
-                    gameFieldObject.Bounce(gameFieldObject.Position.x > Bounds.center.x ? Vector3.left : Vector3.right);
+                    gameFieldObject.Bounce(gfoPosition.x > Bounds.center.x ? Vector3.left : Vector3.right);
                 }
                 else
                 {
                     gameFieldObject.OnOut();
                 }
             }
-            else if (gameFieldObject.Position.y - gameFieldObject.Bounds.extents.y < Bounds.min.y
-                  || gameFieldObject.Position.y + gameFieldObject.Bounds.extents.y > Bounds.max.y)
+            else if (gfoPosition.y - gameFieldObject.Bounds.extents.y < Bounds.min.y
+                  || gfoPosition.y + gameFieldObject.Bounds.extents.y > Bounds.max.y)
             {
                 if (_bounceBounds == BoundsPairs.TopBottom)
                 {
-                    gameFieldObject.Bounce(gameFieldObject.Position.y > Bounds.center.y ? Vector3.down : Vector3.up);
+                    gameFieldObject.Bounce(gfoPosition.y > Bounds.center.y ? Vector3.down : Vector3.up);
                 }
                 else
                 {
@@ -78,7 +84,30 @@ namespace Game.Gameplay
 
         public void Place(IGameFieldObject gameFieldObject)
         {
+            gameFieldObject.Transform.SetParent(transform);
             _objectsInGame.Add(gameFieldObject);
+        }
+
+
+        public void PlacePlayers(PlayerView player1, PlayerView player2)
+        {
+            if (_bounceBounds == BoundsPairs.LeftRight)
+            {
+                player1.transform.localPosition = new Vector3(0, Bounds.min.y + _playerOffset, 0);
+                player1.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+                player2.transform.localPosition = new Vector3(0, Bounds.max.y - _playerOffset, 0);
+                player2.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.down);
+            }
+            else
+            {
+                player1.transform.localPosition = new Vector3(Bounds.min.x + _playerOffset, 0, 0);
+                player1.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.right);
+                player2.transform.localPosition = new Vector3(Bounds.max.x - _playerOffset, 0, 0);
+                player2.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.left);
+            }
+            
+            player1.SetRestrictedArea(this);
+            player2.SetRestrictedArea(this);
         }
 
 
@@ -90,7 +119,29 @@ namespace Game.Gameplay
         }
 
 
-    
+        public bool IsObjectInside(IBoundedObject obj)
+        {
+            var objectPos = obj.Transform.position;
+
+            return !(objectPos.x - obj.Bounds.extents.x < Bounds.min.x
+             || objectPos.x + obj.Bounds.extents.x > Bounds.max.x
+             || objectPos.y - obj.Bounds.extents.y < Bounds.min.y
+             || objectPos.y + obj.Bounds.extents.y > Bounds.max.y);
+        }
+
+
+        public bool IsObjectOutside(IBoundedObject obj)
+        {
+            var objectPos = obj.Transform.position;
+
+            return objectPos.x + obj.Bounds.extents.x < Bounds.min.x
+                || objectPos.x - obj.Bounds.extents.x > Bounds.max.x
+                || objectPos.y + obj.Bounds.extents.y < Bounds.min.y
+                || objectPos.y - obj.Bounds.extents.y > Bounds.max.y;
+        }
+        
+        
+
         private void OnDrawGizmos()
         {
             CalculateBounds();
@@ -102,6 +153,18 @@ namespace Game.Gameplay
             Gizmos.color = _bounceBounds == BoundsPairs.LeftRight ? Color.green : Color.red;
             Gizmos.DrawRay(Bounds.min, Vector3.up * Bounds.size.y);
             Gizmos.DrawRay(Bounds.max, Vector3.down * Bounds.size.y);
+            
+            Gizmos.color = Color.blue;
+            if (_bounceBounds == BoundsPairs.LeftRight)
+            {
+                Gizmos.DrawSphere(new Vector3(0, Bounds.min.y + _playerOffset, 0), 0.2f);
+                Gizmos.DrawSphere(new Vector3(0, Bounds.max.y - _playerOffset, 0),0.2f);
+            }
+            else
+            {
+                Gizmos.DrawSphere(new Vector3(Bounds.min.x + _playerOffset, 0, 0), 0.2f);
+                Gizmos.DrawSphere(new Vector3(Bounds.max.x - _playerOffset, 0, 0), 0.2f);
+            }
         }
     }
 

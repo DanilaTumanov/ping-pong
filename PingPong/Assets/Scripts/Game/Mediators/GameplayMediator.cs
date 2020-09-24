@@ -11,15 +11,5 @@ namespace Game.Mediators
         [Inject]
         public GameplayView View { get; set; }
 
-        [Inject]
-        public IInputController InputController { get; set; }
-
-
-        public override void OnRegister()
-        {
-            base.OnRegister();
-            
-            View.Init(InputController);
-        }
     }
 }
