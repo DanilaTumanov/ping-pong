@@ -6,19 +6,25 @@ using Game.Gameplay.Field;
 using Game.Gameplay.GameEntities;
 using Game.Gameplay.GameEntities.Balls;
 using Game.Mediators;
+using Game.Models;
+using Game.Models.Scores;
 using Game.Services.ConfigService;
 using Game.Services.InputService;
 using Game.Services.RuntimeService;
+using Game.Services.UserDataService;
 using Game.Signals;
 using Game.Views;
 using strange.extensions.context.api;
 using strange.extensions.context.impl;
+using strange.extensions.injector.api;
 using strange.extensions.pool.api;
 using strange.extensions.pool.impl;
 using UnityEngine;
 
 public class GameContext : MVCSContext
 {
+    
+    public static ICrossContextInjectionBinder InjectionBinder { get; private set; }
     
     public GameContext (MonoBehaviour view) : base(view)
     {
@@ -38,6 +44,8 @@ public class GameContext : MVCSContext
 
     protected override void mapBindings()
     {
+        InjectionBinder = injectionBinder;    
+        
         
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
         injectionBinder.Bind<IInputController>().To<InputWinController>().ToSingleton();
@@ -48,19 +56,25 @@ public class GameContext : MVCSContext
         
         //Services
         injectionBinder.Bind<IRuntimeService>().To<RuntimeService>().ToSingleton();
-        //injectionBinder.Bind<IObjectPoolService>().To<ObjectPool>().ToSingleton();
-        injectionBinder.Bind<IPool<Ball>>().To<Pool<Ball>>().ToSingleton();
         injectionBinder.Bind<IConfigService>().To<ConfigService>().ToSingleton();
+        injectionBinder.Bind<IUserDataService>().To<UserDataService>().ToSingleton();
+        
+        
+        // Models
+        injectionBinder.Bind<IScoresModel>().To<ScoresModel>().ToSingleton();
         
 
         // View
         mediationBinder.Bind<AppView>().To<AppMediator>();
         mediationBinder.Bind<GameplayView>().To<GameplayMediator>();
         mediationBinder.Bind<Player>().To<PlayerMediator>();
+        mediationBinder.Bind<HudView>().To<HudMediator>();
         
         
         // Start command
         commandBinder.Bind<StartSignal>().To<StartApp>().Once();
+        commandBinder.Bind<OutSignal>().To<OutCommand>();
+        commandBinder.Bind<HitSignal>().To<HitCommand>();
 
     }
 

@@ -10,6 +10,8 @@ namespace Game.Gameplay.GameEntities.Balls
         
         public override void Hit(Vector3 point, Vector3 normal)
         {
+            base.Hit(point, normal);
+            
             _view.transform.localScale /= _decreaseRate;
             
             if(_view.transform.localScale.x < _minSize)

@@ -1,13 +1,11 @@
 ﻿using System;
-using Game.Gameplay;
 using Game.Gameplay.Field;
-using Game.Gameplay.GameEntities;
 using Game.Gameplay.GameEntities.Balls;
 using strange.extensions.mediation.impl;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Game.Views
+namespace Game.Gameplay
 {
     public class GameplayView : View
     {
@@ -19,6 +17,7 @@ namespace Game.Views
         private Player _player2;
 
         public event Action OnOut;
+        public event Action OnHit;
 
         protected override void Start()
         {
@@ -38,12 +37,18 @@ namespace Game.Views
             ball.Go(randomVector.normalized);
 
             ball.OnBallOut += OutHandler;
+            ball.OnBallHit += HitHandler;
         }
 
         private void OutHandler()
         {
             OnOut?.Invoke();
         }
-    
+
+        private void HitHandler()
+        {
+            OnHit?.Invoke();
+        }
+
     }
 }

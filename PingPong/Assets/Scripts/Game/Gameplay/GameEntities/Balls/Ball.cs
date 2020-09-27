@@ -24,6 +24,7 @@ namespace Game.Gameplay.GameEntities.Balls
 
 
         public event Action OnBallOut;
+        public event Action OnBallHit;
 
 
         protected override void Awake()
@@ -54,7 +55,7 @@ namespace Game.Gameplay.GameEntities.Balls
         
         public virtual void Hit(Vector3 point, Vector3 normal)
         {
-            
+            OnBallHit?.Invoke();
         }
     }
 }
