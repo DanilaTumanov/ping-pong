@@ -1,6 +1,6 @@
 ﻿using System;
+using Game.Gameplay;
 using Game.Services.InputService;
-using Game.Views;
 using strange.extensions.mediation.impl;
 
 namespace Game.Mediators
@@ -9,7 +9,7 @@ namespace Game.Mediators
     {
     
         [Inject]
-        public PlayerView View { get; set; }
+        public Player View { get; set; }
         
         [Inject]
         public IInputController _inputController { get; set; }

@@ -256,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameField: {fileID: 1445091158}
   _playerView: {fileID: 705201141, guid: e13c27fa5f649ae41817036ec8eb9ff1, type: 3}
+  _ball: {fileID: 0}
 --- !u!1 &193171188
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,13 +488,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445091156}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d874cdf3dade05d4dac70514fdb726da, type: 3}
+  m_Script: {fileID: 11500000, guid: 64e48f9102db4b848bf43cfe4b5bb5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bounceBounds: 1
-  _playerOffset: 0.5
+  _bounceBoundsPair: 1
+  _playerOffset: 0.64
+  _bounceBoundPrefab: {fileID: 3890923553586375379, guid: 97690b20dfb434b43b665478261b1aab,
+    type: 3}
+  _outBoundPrefab: {fileID: 4787776342547991726, guid: be23272ac2048424c84369ba0f982e32,
+    type: 3}
 --- !u!1 &1764551664
 GameObject:
   m_ObjectHideFlags: 0

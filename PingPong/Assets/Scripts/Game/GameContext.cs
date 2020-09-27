@@ -1,13 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Game.Commands;
+using Game.Gameplay;
+using Game.Gameplay.Field;
+using Game.Gameplay.GameEntities;
+using Game.Gameplay.GameEntities.Balls;
 using Game.Mediators;
+using Game.Services.ConfigService;
 using Game.Services.InputService;
 using Game.Services.RuntimeService;
 using Game.Signals;
 using Game.Views;
 using strange.extensions.context.api;
 using strange.extensions.context.impl;
+using strange.extensions.pool.api;
+using strange.extensions.pool.impl;
 using UnityEngine;
 
 public class GameContext : MVCSContext
@@ -41,17 +48,19 @@ public class GameContext : MVCSContext
         
         //Services
         injectionBinder.Bind<IRuntimeService>().To<RuntimeService>().ToSingleton();
+        //injectionBinder.Bind<IObjectPoolService>().To<ObjectPool>().ToSingleton();
+        injectionBinder.Bind<IPool<Ball>>().To<Pool<Ball>>().ToSingleton();
+        injectionBinder.Bind<IConfigService>().To<ConfigService>().ToSingleton();
         
 
         // View
         mediationBinder.Bind<AppView>().To<AppMediator>();
         mediationBinder.Bind<GameplayView>().To<GameplayMediator>();
-        mediationBinder.Bind<PlayerView>().To<PlayerMediator>();
+        mediationBinder.Bind<Player>().To<PlayerMediator>();
         
         
         // Start command
         commandBinder.Bind<StartSignal>().To<StartApp>().Once();
-
 
     }
 

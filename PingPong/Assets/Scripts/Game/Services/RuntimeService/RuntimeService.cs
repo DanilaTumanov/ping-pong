@@ -6,6 +6,7 @@ namespace Game.Services.RuntimeService
     public class RuntimeService : IRuntimeService
     {
         public event Action OnUpdate;
+        public event Action OnFixedUpdate;
         public event Action OnLateUpdate;
         public event Action OnQuit;
         public event Action OnPause;
@@ -16,6 +17,7 @@ namespace Game.Services.RuntimeService
             var go = new GameObject("RuntimeClient");
             var runtimeClient = go.AddComponent<RuntimeClient>();
             runtimeClient.OnUpdate += () => OnUpdate?.Invoke();
+            runtimeClient.OnFixedUpdate += () => OnFixedUpdate?.Invoke();
             runtimeClient.OnLateUpdate += () => OnLateUpdate?.Invoke();
             runtimeClient.OnQuit += () => OnQuit?.Invoke();
             runtimeClient.OnPause += () => OnPause?.Invoke();

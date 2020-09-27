@@ -6,6 +6,7 @@ namespace Game.Services.RuntimeService
     public class RuntimeClient : MonoBehaviour, IAppLifeCycle
     {
         public event Action OnUpdate;
+        public event Action OnFixedUpdate;
         public event Action OnLateUpdate;
         public event Action OnQuit;
         public event Action OnPause;
@@ -19,6 +20,11 @@ namespace Game.Services.RuntimeService
         private void Update()
         {
             OnUpdate?.Invoke();
+        }
+
+        private void FixedUpdate()
+        {
+            OnFixedUpdate?.Invoke();
         }
 
         private void LateUpdate()
