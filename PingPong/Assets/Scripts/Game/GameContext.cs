@@ -24,8 +24,6 @@ using UnityEngine;
 public class GameContext : MVCSContext
 {
     
-    public static ICrossContextInjectionBinder InjectionBinder { get; private set; }
-    
     public GameContext (MonoBehaviour view) : base(view)
     {
     }
@@ -44,14 +42,15 @@ public class GameContext : MVCSContext
 
     protected override void mapBindings()
     {
-        InjectionBinder = injectionBinder;    
-        
         
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
         injectionBinder.Bind<IInputController>().To<InputWinController>().ToSingleton();
 #elif UNITY_ANDROID || UNITY_IOS
         injectionBinder.Bind<IInputController>().To<InputMobileController>().ToSingleton();
 #endif
+
+
+        injectionBinder.Bind<IDataStorageDriver>().To<PlayerPrefsStorageDriver>();
         
         
         //Services

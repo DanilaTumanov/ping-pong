@@ -7,8 +7,17 @@ using UnityEngine;
 
 namespace Game.Services.UserDataService
 {
+    
+    
     public class UserDataService: IUserDataService
     {
+        private readonly IDataStorageDriver _dataStorageDriver;
+
+        public UserDataService(IDataStorageDriver dataStorageDriver)
+        {
+            _dataStorageDriver = dataStorageDriver;
+        }
+        
         
         public void Load(object userDataObject)
         {
@@ -16,41 +25,25 @@ namespace Game.Services.UserDataService
             {
                 if (savePropertyData.propertyInfo.PropertyType == typeof(int))
                 {
-                    savePropertyData.propertyInfo.SetValue(
-                        savePropertyData.contextPropertyInstance,
-                        PlayerPrefs.GetInt(
-                            savePropertyData.name, 
-                            (int) savePropertyData.propertyInfo.GetValue(
-                                savePropertyData.contextPropertyInstance
-                            )
-                        )
-                    );
+                    Load(savePropertyData, _dataStorageDriver.LoadInt);
                 }
                 else if (savePropertyData.propertyInfo.PropertyType == typeof(float))
                 {
-                    savePropertyData.propertyInfo.SetValue(
-                        savePropertyData.contextPropertyInstance,
-                        PlayerPrefs.GetFloat(
-                            savePropertyData.name, 
-                            (float) savePropertyData.propertyInfo.GetValue(
-                                savePropertyData.contextPropertyInstance
-                            )
-                        )
-                    );
+                    Load(savePropertyData, _dataStorageDriver.LoadFloat);
                 }
                 else if (savePropertyData.propertyInfo.PropertyType == typeof(string))
                 {
-                    savePropertyData.propertyInfo.SetValue(
-                        savePropertyData.contextPropertyInstance,
-                        PlayerPrefs.GetString(
-                            savePropertyData.name, 
-                            (string) savePropertyData.propertyInfo.GetValue(
-                                savePropertyData.contextPropertyInstance
-                            )
-                        )
-                    );
+                    Load(savePropertyData, _dataStorageDriver.LoadString);
                 }
             }
+        }
+
+        private void Load<T>(SavePropertyData data, Func<string, T> loader)
+        {
+            data.propertyInfo.SetValue(
+                data.contextPropertyInstance,
+                loader(data.name)
+            );
         }
 
         public void Save(object userDataObject)
@@ -59,33 +52,28 @@ namespace Game.Services.UserDataService
             {
                 if (savePropertyData.propertyInfo.PropertyType == typeof(int))
                 {
-                    PlayerPrefs.SetInt(
-                        savePropertyData.name, 
-                        (int) savePropertyData.propertyInfo.GetValue(
-                            savePropertyData.contextPropertyInstance
-                        )
-                    );
+                    Save<int>(savePropertyData, _dataStorageDriver.SaveInt);
                 }
                 else if (savePropertyData.propertyInfo.PropertyType == typeof(float))
                 {
-                    PlayerPrefs.SetFloat(
-                        savePropertyData.name, 
-                        (float) savePropertyData.propertyInfo.GetValue(
-                            savePropertyData.contextPropertyInstance
-                        )
-                    );
+                    Save<float>(savePropertyData, _dataStorageDriver.SaveFloat);
                 }
                 else if (savePropertyData.propertyInfo.PropertyType == typeof(string))
                 {
-                    PlayerPrefs.SetString(
-                        savePropertyData.name, 
-                        (string) savePropertyData.propertyInfo.GetValue(
-                            savePropertyData.contextPropertyInstance
-                        )
-                    );
+                    Save<string>(savePropertyData, _dataStorageDriver.SaveString);
                 }
             }
-            PlayerPrefs.Save();
+            
+        }
+        
+        private void Save<T>(SavePropertyData data, Action<string, T> saver)
+        {
+            saver(
+                data.name,
+                (T) data.propertyInfo.GetValue(
+                    data.contextPropertyInstance
+                )
+            );
         }
 
 
