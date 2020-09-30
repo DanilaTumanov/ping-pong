@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Gameplay;
+using Game.Services;
 using Game.Services.InputService;
 using Photon.Pun;
 using strange.extensions.mediation.impl;
@@ -7,6 +8,11 @@ using UnityEngine;
 
 namespace Game.Mediators
 {
+    
+    /// <summary>
+    /// Медиатор игрока, отвечает за отображение игрока,
+    /// реагирует на пользовательский ввод
+    /// </summary>
     public class PlayerMediator : Mediator
     {
     

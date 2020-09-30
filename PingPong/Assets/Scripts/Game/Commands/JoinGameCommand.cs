@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace Game.Commands
 {
+    
+    /// <summary>
+    /// Команда обработки присоединения к игре
+    /// </summary>
     public class JoinGameCommand : Command
     {
         private readonly INetworkService _networkService;

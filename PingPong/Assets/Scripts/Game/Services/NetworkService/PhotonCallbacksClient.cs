@@ -8,6 +8,10 @@ using UnityEngine;
 
 namespace Game.Services.NetworkService
 {
+    
+    /// <summary>
+    /// Runtime клиент для перевода коллбэков Photon в асинхронное апи
+    /// </summary>
     public class PhotonCallbacksClient : MonoBehaviourPunCallbacks
     {
         

@@ -5,6 +5,10 @@ using Object = UnityEngine.Object;
 
 namespace Game.Services.RuntimeService
 {
+    
+    /// <summary>
+    /// См. интерфейс
+    /// </summary>
     public class RuntimeService : IRuntimeService
     {
 

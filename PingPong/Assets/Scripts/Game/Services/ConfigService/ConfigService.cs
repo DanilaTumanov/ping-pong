@@ -2,6 +2,10 @@
 
 namespace Game.Services.ConfigService
 {
+    
+    /// <summary>
+    /// См. интерфейс
+    /// </summary>
     public class ConfigService : IConfigService
     {
 

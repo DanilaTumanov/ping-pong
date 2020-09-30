@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace Game.Mediators
 {
+    
+    /// <summary>
+    /// Медиатор окна настроек. Отвечает за отображене и изменение настроек
+    /// </summary>
     public class SettingsMediator : Mediator
     {
         

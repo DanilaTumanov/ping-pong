@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 namespace Game.Views
 {
-    
+ 
+    /// <summary>
+    /// Отображение UI элемента, который можно показать или скрыть, используя отдельный Canvas
+    /// </summary>
     [RequireComponent(typeof(Canvas))]
     [RequireComponent(typeof(GraphicRaycaster))]
     public class CanvasView : View

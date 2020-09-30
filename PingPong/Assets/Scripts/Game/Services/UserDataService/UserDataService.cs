@@ -8,7 +8,9 @@ using UnityEngine;
 namespace Game.Services.UserDataService
 {
     
-    
+    /// <summary>
+    /// См. интерфейс
+    /// </summary>
     public class UserDataService: IUserDataService
     {
         private readonly IDataStorageDriver _dataStorageDriver;

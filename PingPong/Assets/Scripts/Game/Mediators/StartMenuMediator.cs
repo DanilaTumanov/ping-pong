@@ -5,6 +5,10 @@ using strange.extensions.mediation.impl;
 
 namespace Game.Mediators
 {
+    
+    /// <summary>
+    /// Медиатор стартового экрана. Отображает код приглашения после подключения photon.
+    /// </summary>
     public class StartMenuMediator : Mediator
     {
     

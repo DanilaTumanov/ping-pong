@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Gameplay.Field.Bounds
 {
+    
+    /// <summary>
+    /// Ограничитель одной стороны игрового поля
+    /// </summary>
     public class FieldBound : MonoBehaviour
     {
 
@@ -17,6 +21,10 @@ namespace Game.Gameplay.Field.Bounds
             SetPivot(_pivot);
         }
 
+        /// <summary>
+        /// Установка пивота коллайдера по аналогии с UI - в нормализованных координатах
+        /// </summary>
+        /// <param name="pivot"></param>
         public void SetPivot(Vector2 pivot)
         {
             _pivot = pivot;

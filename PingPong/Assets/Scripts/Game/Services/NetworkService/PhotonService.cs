@@ -8,6 +8,10 @@ using UnityEngine;
 
 namespace Game.Services.NetworkService
 {
+    
+    /// <summary>
+    /// Сервис сетевого взаимодействия Photon
+    /// </summary>
     public class PhotonService : INetworkService
     {
         private const int RETRY_MILLISECONDS = 5000;

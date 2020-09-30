@@ -2,6 +2,11 @@
 
 namespace Game.Helpers
 {
+    
+    /// <summary>
+    /// Вспомогательный класс для фиксации соотношения сторон камеры,
+    /// для соблюдения одинаковых координат у игроков. Временное решение.
+    /// </summary>
     public class CameraController : MonoBehaviour
     {
 

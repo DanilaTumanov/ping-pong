@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 namespace Game.Views
 {
+    
+    /// <summary>
+    /// Отображение стартового экрана
+    /// </summary>
     public class StartMenuView : CanvasView
     {
 

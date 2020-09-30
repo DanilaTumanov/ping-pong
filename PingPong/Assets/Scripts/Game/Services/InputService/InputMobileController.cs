@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Services.InputService
 {
+    
+    /// <summary>
+    /// Контроллер ввода для мобильных устройств
+    /// </summary>
     public class InputMobileController : Game.Services.InputService.InputController
     {
         /// <summary>

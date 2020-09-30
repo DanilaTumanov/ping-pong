@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Models
 {
+    
+    /// <summary>
+    /// Настройки игры
+    /// </summary>
     public interface ISettingsModel
     {
     

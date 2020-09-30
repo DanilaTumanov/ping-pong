@@ -4,7 +4,12 @@ using Game.Services.UserDataService;
 
 namespace Game.Models
 {
-    public class Model
+    
+    /// <summary>
+    /// Базовый класс модели, загружает пользовательские данные модели,
+    /// если они есть (помечены аттрибутом [Save]), и так же сохраняет их при выходе
+    /// </summary>
+    public abstract class Model
     {
 
         public Model(IUserDataService userDataService, IRuntimeService runtimeService)

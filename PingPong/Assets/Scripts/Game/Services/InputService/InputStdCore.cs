@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 namespace Game.Services.InputService
 {
 
+    /// <summary>
+    /// Ядро контроллера ввода
+    /// </summary>
     public abstract class InputStdCore
     {
         private const bool BLOCK_OVER_UI = false;

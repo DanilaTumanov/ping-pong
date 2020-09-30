@@ -4,6 +4,10 @@ using strange.extensions.mediation.impl;
 
 namespace Game.Mediators
 {
+    
+    /// <summary>
+    /// Медиатор интерфейса геймплея, контролирует отображение очков и заднего фона
+    /// </summary>
     public class HudMediator : Mediator
     {
 

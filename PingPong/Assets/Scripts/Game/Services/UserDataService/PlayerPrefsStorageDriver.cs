@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Services.UserDataService
 {
+    
+    /// <summary>
+    /// Драйвер сохранения пользовательских данных в PlayerPrefs
+    /// </summary>
     public class PlayerPrefsStorageDriver : IDataStorageDriver
     {
         public void SaveInt(string name, int value)

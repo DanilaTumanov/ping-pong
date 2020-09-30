@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Game.Services.ConfigService
 {
+    
+    /// <summary>
+    /// Файл конфигурации приложения
+    /// </summary>
     [CreateAssetMenu(fileName = "Config", menuName = "Config", order = 1)]
     public class Config : ScriptableObject
     {
@@ -18,6 +22,8 @@ namespace Game.Services.ConfigService
         public string ballsPrefabsResourceFolder;
 
         public Sprite[] backgrounds;
+
+        public Vector2 invitationCodesRange;
 
     }
 }

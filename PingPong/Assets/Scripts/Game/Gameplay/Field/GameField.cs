@@ -8,7 +8,9 @@ using UnityEngine;
 namespace Game.Gameplay.Field
 {
     
-    [DisallowMultipleComponent]
+    /// <summary>
+    /// Игровое поле, помогает правильно располагать объекты, ограничители и рассчитывать все что связано с границами
+    /// </summary>
     public class GameField : MonoBehaviour, IRestrictedArea
     {
         private const float BOUND_THICKNESS = 1;
@@ -22,6 +24,9 @@ namespace Game.Gameplay.Field
         private FieldBound[] _bounceBounds = new FieldBound[2];
         private OutBound[] _outBounds = new OutBound[2];
         
+        /// <summary>
+        /// Границы игрового поля
+        /// </summary>
         public UnityEngine.Bounds Bounds { get; private set; }
 
 
@@ -51,7 +56,12 @@ namespace Game.Gameplay.Field
         }
         
 
-        public void PlacePlayers(Player player, bool isMasterClient)
+        /// <summary>
+        /// Разместить игрока на поле
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="isMasterClient">Признак главного клиента</param>
+        public void PlacePlayer(Player player, bool isMasterClient)
         {
             if (isMasterClient)
             {
@@ -139,6 +149,10 @@ namespace Game.Gameplay.Field
             bound.transform.position = position;
         }
         
+        
+        /// <summary>
+        /// Пересчет размеров и позиций ограничителей
+        /// </summary>
         public void Reset()
         {
             CalculateBounds();

@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace Game.Mediators
 {
+    
+    /// <summary>
+    /// Медиатор мяча, реагирует на отбитие и аут
+    /// </summary>
     public class BallMediator : Mediator
     {
         

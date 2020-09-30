@@ -4,6 +4,9 @@ using UnityEngine.Events;
 
 namespace Game.Services.InputService
 {
+    /// <summary>
+    /// См. интерфейс
+    /// </summary>
     public abstract class InputController: InputStdCore, IInputController
     {
         

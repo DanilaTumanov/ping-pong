@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Services.RuntimeService
 {
+    
+    /// <summary>
+    /// Runtime клиент для отслеживания жизненного цикла объектов
+    /// </summary>
     public class RuntimeClient : MonoBehaviour, IAppLifeCycle
     {
         public event Action OnUpdate;

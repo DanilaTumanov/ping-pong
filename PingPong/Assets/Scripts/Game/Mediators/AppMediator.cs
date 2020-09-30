@@ -1,10 +1,15 @@
 ﻿using Game.Models;
 using Game.Signals;
+using Game.Views;
 using Photon.Realtime;
 using strange.extensions.mediation.impl;
 
 namespace Game.Mediators
 {
+    
+    /// <summary>
+    /// Медиатор корневого уровня приложения. Может переключать глобальные меню и игровой экран
+    /// </summary>
     public class AppMediator : Mediator
     {
     

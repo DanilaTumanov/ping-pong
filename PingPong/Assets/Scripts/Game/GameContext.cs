@@ -24,6 +24,10 @@ using strange.extensions.pool.api;
 using strange.extensions.pool.impl;
 using UnityEngine;
 
+
+/// <summary>
+/// Корень компоновки DI, настройка всех компонентов MVCS, распределение зависимостей
+/// </summary>
 public class GameContext : MVCSContext
 {
     

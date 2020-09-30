@@ -3,6 +3,10 @@ using strange.extensions.command.impl;
 
 namespace Game.Commands
 {
+    
+    /// <summary>
+    /// Команда обработки выбивания мячика в аут
+    /// </summary>
     public class OutCommand : Command
     {
         private readonly IScoresModel _scoresModel;

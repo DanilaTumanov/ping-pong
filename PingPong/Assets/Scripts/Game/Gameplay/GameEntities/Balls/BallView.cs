@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Game.Gameplay.GameEntities.Balls
 {
+    
+    /// <summary>
+    /// Вью мяча (V - из MVCS), фасад, предоставляющий апи для работы с мячом
+    /// </summary>
     public class BallView : View
     {
 
@@ -44,11 +48,17 @@ namespace Game.Gameplay.GameEntities.Balls
             BallPhoton.RPC(nameof(BallPhoton.SyncHit), RpcTarget.All);
         }
         
+        /// <summary>
+        /// Проброс события синхронизации аута, вызванного RPC методом
+        /// </summary>
         private void SyncOutHandler()
         {
             OnBallOut?.Invoke();
         }
         
+        /// <summary>
+        /// Проброс события синхронизации отбития, вызванного RPC методом
+        /// </summary>
         private void SyncHitHandler()
         {
             OnBallHit?.Invoke();

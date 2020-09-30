@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public interface IAppLifeCycle
+namespace Game.Services
 {
     
-    event Action OnUpdate;
+    /// <summary>
+    /// Объект реализующий события жизненного цикла юнити
+    /// </summary>
+    public interface IAppLifeCycle
+    {
     
-    event Action OnFixedUpdate;
+        event Action OnUpdate;
     
-    event Action OnLateUpdate;
+        event Action OnFixedUpdate;
+    
+        event Action OnLateUpdate;
 
-    event Action OnQuit;
+        event Action OnQuit;
 
-    event Action OnPause;
+        event Action OnPause;
     
+    }
 }

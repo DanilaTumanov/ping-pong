@@ -4,6 +4,12 @@ using UnityEngine.UI;
 
 namespace Game.Views
 {
+    
+    /// <summary>
+    /// Отображение переключателя для выбора заднего фона,
+    /// из которых собирается группа переключателей,
+    /// каждый из которых соответствует своему фону
+    /// </summary>
     public class BackgroundToggleView : MonoBehaviour
     {
 

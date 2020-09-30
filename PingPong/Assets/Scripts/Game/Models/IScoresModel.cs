@@ -1,5 +1,9 @@
 ﻿namespace Game.Models
 {
+    
+    /// <summary>
+    /// Набранные очки
+    /// </summary>
     public interface IScoresModel
     {
 

@@ -2,6 +2,11 @@
 
 namespace Game.Models
 {
+    
+    /// <summary>
+    /// Свойство, на изменение которого можно подписаться.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ContextProperty<T>
     {
 

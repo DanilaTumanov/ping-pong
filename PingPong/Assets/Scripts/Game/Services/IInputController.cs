@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Game.Services.InputService
+namespace Game.Services
 {
+    
+    /// <summary>
+    /// Универсальный контроллер ввода для мобильных устройств и ПК
+    /// ============================================
+    /// Данный класс и весь сервис ввода был написан очень давно и нуждается в переработке.
+    /// </summary>
     public interface IInputController
     {
     

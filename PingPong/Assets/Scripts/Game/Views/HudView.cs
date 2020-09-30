@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 namespace Game.Views
 {
+    
+    /// <summary>
+    /// Отображение игрового интерфейса
+    /// </summary>
     public class HudView : CanvasView
     {
 

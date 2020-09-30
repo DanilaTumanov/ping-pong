@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 namespace Game.Views
 {
+    
+    /// <summary>
+    /// Отображение настроек игры
+    /// </summary>
     public class SettingsView : CanvasView
     {
 

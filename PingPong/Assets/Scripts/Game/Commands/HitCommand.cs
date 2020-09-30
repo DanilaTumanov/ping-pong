@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Game.Commands
 {
+    
+    /// <summary>
+    /// Команда обработки отбития мячика
+    /// </summary>
     public class HitCommand : Command
     {
         private readonly IScoresModel _scoresModel;

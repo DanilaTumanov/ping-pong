@@ -1,5 +1,9 @@
 ﻿namespace Game.Services.UserDataService
 {
+    
+    /// <summary>
+    /// Драйвер сохранения пользовательских данных
+    /// </summary>
     public interface IDataStorageDriver
     {
 

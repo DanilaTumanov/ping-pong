@@ -1,11 +1,15 @@
 ﻿using System;
 using Game.Gameplay.GameEntities;
+using Game.Gameplay.InteractionInterfaces;
 using strange.extensions.mediation.impl;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
-    [DisallowMultipleComponent]
+    
+    /// <summary>
+    /// Отображение игрока (ракетка), реализует апи для перемещения и отслеживает коллизии с мячом
+    /// </summary>
     public class Player : View, IBoundedObject
     {
         
@@ -25,6 +29,11 @@ namespace Game.Gameplay
             _oldPos = transform.position;
         }
         
+        
+        /// <summary>
+        /// Установка ограничивающей области для обработки управления
+        /// </summary>
+        /// <param name="area"></param>
         public void SetRestrictedArea(IRestrictedArea area)
         {
             _restrictedArea = area;

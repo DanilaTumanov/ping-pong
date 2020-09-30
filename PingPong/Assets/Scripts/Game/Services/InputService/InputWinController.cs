@@ -4,6 +4,10 @@ using UnityEngine.UIElements;
 
 namespace Game.Services.InputService
 {
+    
+    /// <summary>
+    /// Заглушка для ввода на ПК
+    /// </summary>
     public class InputWinController : Game.Services.InputService.InputController
     {
         private int[] _pointerIds = new int[0];

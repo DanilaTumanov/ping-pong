@@ -15,6 +15,11 @@ using Random = UnityEngine.Random;
 
 namespace Game.Mediators
 {
+    
+    /// <summary>
+    /// Медиатор геймплея, определяет глобальную логику отображения после аута,
+    /// ожидает подключения оппонента для запуска игры, создает игроков и мячи
+    /// </summary>
     public class GameplayMediator : Mediator
     {
 

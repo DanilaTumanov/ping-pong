@@ -2,6 +2,10 @@
 
 namespace Game.Gameplay.GameEntities.Balls
 {
+    
+    /// <summary>
+    /// Класс, описывающий поведение мяча, уменьшающегося в размерах при каждом отбитии
+    /// </summary>
     public class DecreasingBall : Ball
     {
         [SerializeField] private Transform _view;

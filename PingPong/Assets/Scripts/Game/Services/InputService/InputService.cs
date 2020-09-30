@@ -3,7 +3,11 @@ using UnityEngine.SceneManagement;
 
 namespace Game.Services.InputService
 {
-    public class InputService
+    
+    /// <summary>
+    /// См. интерфейс
+    /// </summary>
+    public class InputService : IInputService
     {
 
         public IInputController Controller { get; private set; }

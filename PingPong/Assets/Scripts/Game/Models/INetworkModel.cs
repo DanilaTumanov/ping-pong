@@ -3,6 +3,10 @@ using Photon.Realtime;
 
 namespace Game.Models
 {
+    
+    /// <summary>
+    /// Модель с информацией о сетевом подключении
+    /// </summary>
     public interface INetworkModel
     {
         

@@ -7,6 +7,11 @@ using UnityEngine;
 namespace Game.Gameplay.GameEntities.Balls
 {
  
+    /// <summary>
+    /// Класс, описывающий физическое поведение мяча.
+    /// Запускает мяч в стартовом направлении, контролирует его скорость,
+    /// отслеживает отбитие ракеткой и попадание в аут
+    /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Rigidbody2D))]
     public class Ball : MonoBehaviour, IHitable, IOutObject

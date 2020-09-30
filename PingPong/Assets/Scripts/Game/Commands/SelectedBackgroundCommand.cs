@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Game.Commands
 {
+    
+    /// <summary>
+    /// Команда обработки выбора заднего фона игры
+    /// </summary>
     public class SelectedBackgroundCommand : Command
     {
         private readonly ISettingsModel _settingsModel;

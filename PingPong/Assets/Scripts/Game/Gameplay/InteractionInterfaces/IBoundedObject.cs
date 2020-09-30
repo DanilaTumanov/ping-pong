@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Game.Gameplay
+namespace Game.Gameplay.InteractionInterfaces
 {
+    
+    /// <summary>
+    /// Объект, имеющий прямоугольные границы
+    /// </summary>
     public interface IBoundedObject
     {
         
