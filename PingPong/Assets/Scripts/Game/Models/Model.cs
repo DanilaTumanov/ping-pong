@@ -16,7 +16,12 @@ namespace Game.Models
         {
             userDataService.Load(this);
             runtimeService.OnQuit += () => userDataService.Save(this);
+            runtimeService.OnPause += pause =>
+            {
+                if (pause)
+                    userDataService.Save(this);
+            };
         }
-    
+        
     }
 }

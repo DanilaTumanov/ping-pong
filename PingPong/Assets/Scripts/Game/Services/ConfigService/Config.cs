@@ -23,7 +23,7 @@ namespace Game.Services.ConfigService
 
         public Sprite[] backgrounds;
 
-        public Vector2 invitationCodesRange;
+        public Vector2Int invitationCodesRange;
 
     }
 }

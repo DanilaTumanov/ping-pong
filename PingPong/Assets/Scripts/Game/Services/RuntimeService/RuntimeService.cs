@@ -19,7 +19,7 @@ namespace Game.Services.RuntimeService
         public event Action OnFixedUpdate;
         public event Action OnLateUpdate;
         public event Action OnQuit;
-        public event Action OnPause;
+        public event Action<bool> OnPause;
 
 
         public RuntimeService()
@@ -34,7 +34,7 @@ namespace Game.Services.RuntimeService
             _runtimeClient.OnFixedUpdate += () => OnFixedUpdate?.Invoke();
             _runtimeClient.OnLateUpdate += () => OnLateUpdate?.Invoke();
             _runtimeClient.OnQuit += () => OnQuit?.Invoke();
-            _runtimeClient.OnPause += () => OnPause?.Invoke();
+            _runtimeClient.OnPause += pause => OnPause?.Invoke(pause);
         }
 
         public T RegisterClient<T>() where T : MonoBehaviour

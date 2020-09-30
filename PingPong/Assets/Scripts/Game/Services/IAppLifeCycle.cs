@@ -17,7 +17,7 @@ namespace Game.Services
 
         event Action OnQuit;
 
-        event Action OnPause;
+        event Action<bool> OnPause;
     
     }
 }

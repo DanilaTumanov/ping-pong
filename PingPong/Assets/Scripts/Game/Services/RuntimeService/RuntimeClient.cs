@@ -13,7 +13,7 @@ namespace Game.Services.RuntimeService
         public event Action OnFixedUpdate;
         public event Action OnLateUpdate;
         public event Action OnQuit;
-        public event Action OnPause;
+        public event Action<bool> OnPause;
 
 
         private void Awake()
@@ -43,7 +43,7 @@ namespace Game.Services.RuntimeService
 
         private void OnApplicationPause(bool pauseStatus)
         {
-            OnPause?.Invoke();
+            OnPause?.Invoke(pauseStatus);
         }
     }
 }
