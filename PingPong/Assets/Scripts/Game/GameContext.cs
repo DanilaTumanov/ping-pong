@@ -8,8 +8,10 @@ using Game.Gameplay.GameEntities.Balls;
 using Game.Mediators;
 using Game.Models;
 using Game.Models.Scores;
+using Game.Services;
 using Game.Services.ConfigService;
 using Game.Services.InputService;
+using Game.Services.NetworkService;
 using Game.Services.RuntimeService;
 using Game.Services.UserDataService;
 using Game.Signals;
@@ -57,10 +59,12 @@ public class GameContext : MVCSContext
         injectionBinder.Bind<IRuntimeService>().To<RuntimeService>().ToSingleton();
         injectionBinder.Bind<IConfigService>().To<ConfigService>().ToSingleton();
         injectionBinder.Bind<IUserDataService>().To<UserDataService>().ToSingleton();
+        injectionBinder.Bind<INetworkService>().To<PhotonService>().ToSingleton();
         
         
         // Models
         injectionBinder.Bind<IScoresModel>().To<ScoresModel>().ToSingleton();
+        injectionBinder.Bind<INetworkModel>().To<NetworkModel>().ToSingleton();
         
 
         // View
@@ -68,13 +72,17 @@ public class GameContext : MVCSContext
         mediationBinder.Bind<GameplayView>().To<GameplayMediator>();
         mediationBinder.Bind<Player>().To<PlayerMediator>();
         mediationBinder.Bind<HudView>().To<HudMediator>();
+        mediationBinder.Bind<StartMenuView>().To<StartMenuMediator>();
         
+        
+        // Commands
+        commandBinder.Bind<OutSignal>().To<OutCommand>();
+        commandBinder.Bind<HitSignal>().To<HitCommand>();
+        commandBinder.Bind<JoinGameSignal>().To<JoinGameCommand>();
         
         // Start command
         commandBinder.Bind<StartSignal>().To<StartApp>().Once();
-        commandBinder.Bind<OutSignal>().To<OutCommand>();
-        commandBinder.Bind<HitSignal>().To<HitCommand>();
-
+        
     }
 
 }

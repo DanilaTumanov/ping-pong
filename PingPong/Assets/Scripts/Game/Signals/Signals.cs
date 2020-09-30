@@ -12,4 +12,6 @@ namespace Game.Signals
     
     public class OutSignal : Signal {}
     
+    public class JoinGameSignal : Signal<string> {}
+    
 }

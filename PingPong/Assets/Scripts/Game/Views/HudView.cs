@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Game.Views
 {
-    public class HudView : View
+    public class HudView : CanvasView
     {
 
         [SerializeField] private Text _score;

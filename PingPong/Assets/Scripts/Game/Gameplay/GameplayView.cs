@@ -13,19 +13,18 @@ namespace Game.Gameplay
         [SerializeField] private GameField _gameField;
         [SerializeField] private Player _playerView;
 
-        private Player _player1;
-        private Player _player2;
+        private Player _hostPlayer;
+        private Player _clientPlayer;
 
         public event Action OnOut;
         public event Action OnHit;
 
         protected override void Start()
         {
-            _player1 = Instantiate(_playerView);
-            _player2 = Instantiate(_playerView);
+            _hostPlayer = Instantiate(_playerView);
+            _clientPlayer = Instantiate(_playerView);
         
-            _gameField.PlacePlayers(_player1, _player2);
-            
+            _gameField.PlacePlayers(_hostPlayer, _clientPlayer);
         }
 
         public void BallInPlay(Ball ball)

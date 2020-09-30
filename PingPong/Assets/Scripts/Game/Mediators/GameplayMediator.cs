@@ -35,7 +35,7 @@ namespace Game.Mediators
 
             View.OnOut += OutHandler;
             View.OnHit += HitHandler;
-            View.BallInPlay(GetRandomBall());
+            //View.BallInPlay(GetRandomBall());
         }
 
         private Ball GetRandomBall()
