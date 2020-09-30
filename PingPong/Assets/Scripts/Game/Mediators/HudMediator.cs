@@ -12,6 +12,9 @@ namespace Game.Mediators
         
         [Inject]
         public IScoresModel ScoresModel { get; set; }
+        
+        [Inject]
+        public ISettingsModel SettingsModel { get; set; }
 
 
         public override void OnRegister()
@@ -23,6 +26,15 @@ namespace Game.Mediators
 
             View.SetScore(0);
             View.SetMaxScore(ScoresModel.MaxScores.Value);
+            UpdateBackground();
+
+            SettingsModel.SelectedBackground.OnChanged += (oldI, newI) => UpdateBackground();
+        }
+
+
+        private void UpdateBackground()
+        {
+            View.SetBackground(SettingsModel.BackgroundsList.Value[SettingsModel.SelectedBackground.Value]);
         }
     }
 }

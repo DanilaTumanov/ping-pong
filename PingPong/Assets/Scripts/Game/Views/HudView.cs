@@ -9,6 +9,7 @@ namespace Game.Views
 
         [SerializeField] private Text _score;
         [SerializeField] private Text _maxScore;
+        [SerializeField] private Image _background;
 
         public void SetScore(int score)
         {
@@ -18,6 +19,11 @@ namespace Game.Views
         public void SetMaxScore(int maxScore)
         {
             _maxScore.text = maxScore.ToString();
+        }
+
+        public void SetBackground(Sprite sprite)
+        {
+            _background.sprite = sprite;
         }
         
     }

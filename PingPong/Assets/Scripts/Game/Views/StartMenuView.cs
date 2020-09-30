@@ -13,9 +13,12 @@ namespace Game.Views
         [SerializeField] private InputField _joinCode;
 
         [SerializeField] private Button _joinGame;
+        
+        [SerializeField] private Button _settingsButton;
 
 
         public event Action<string> OnJoinGamePressed;
+        public event Action OnSettingsButtonPressed;
         
 
         protected override void Awake()
@@ -23,6 +26,7 @@ namespace Game.Views
             base.Awake();
             
             _joinGame.onClick.AddListener(JoinButtonHandler);
+            _settingsButton.onClick.AddListener(SettingsButtonHandler);
         }
 
         public void SetInvitationCode(string code)
@@ -33,6 +37,11 @@ namespace Game.Views
         private void JoinButtonHandler()
         {
             OnJoinGamePressed?.Invoke(_joinCode.text);
+        }
+
+        private void SettingsButtonHandler()
+        {
+            OnSettingsButtonPressed?.Invoke();
         }
         
     }

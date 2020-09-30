@@ -16,6 +16,9 @@ namespace Game.Mediators
         
         [Inject]
         public JoinGameSignal JoinGameSignal { get; set; }
+        
+        [Inject]
+        public SettingsOpenButtonSignal SettingsOpenButtonSignal { get; set; }
 
 
         public override void OnRegister()
@@ -23,12 +26,19 @@ namespace Game.Mediators
             View.SetInvitationCode("");
             NetworkModel.InvitationCode.OnChanged += (oldC, newC) => View.SetInvitationCode(newC);
             View.OnJoinGamePressed += OnJoinGameHandler;
+            View.OnSettingsButtonPressed += OnSettingsButtonPressHandler;
         }
 
 
         private void OnJoinGameHandler(string code)
         {
             JoinGameSignal.Dispatch(code);
+        }
+
+
+        private void OnSettingsButtonPressHandler()
+        {
+            SettingsOpenButtonSignal.Dispatch();
         }
     }
 }

@@ -20,3 +20,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 705201141, guid: e13c27fa5f649ae41817036ec8eb9ff1, type: 3}
   playerPrefabResourceFolder: Prefabs
   ballsPrefabsResourceFolder: Prefabs/Balls
+  backgrounds:
+  - {fileID: 21300000, guid: bea01b81f28bc2c4b97f149a0cb22119, type: 3}
+  - {fileID: 21300000, guid: 626ed267eb5e4fa418b44d4f752912a5, type: 3}
+  - {fileID: 21300000, guid: 0c23f922cdf170c4d848f3d5bc7d9fff, type: 3}

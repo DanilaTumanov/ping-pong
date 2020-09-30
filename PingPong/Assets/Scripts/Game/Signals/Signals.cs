@@ -14,4 +14,10 @@ namespace Game.Signals
     
     public class JoinGameSignal : Signal<string> {}
     
+    public class SelectedBackgroundSignal : Signal<int> {}
+    
+    public class SettingsCloseButtonSignal : Signal {}
+    
+    public class SettingsOpenButtonSignal : Signal {}
+    
 }

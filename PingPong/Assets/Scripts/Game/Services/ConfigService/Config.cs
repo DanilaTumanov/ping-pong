@@ -17,5 +17,7 @@ namespace Game.Services.ConfigService
         
         public string ballsPrefabsResourceFolder;
 
+        public Sprite[] backgrounds;
+
     }
 }
