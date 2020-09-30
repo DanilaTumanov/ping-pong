@@ -36,7 +36,7 @@ public class GameContext : MVCSContext
     public override IContext Start()
     {
         base.Start();
-        StartSignal startSignal= injectionBinder.GetInstance<StartSignal>();
+        StartSignal startSignal = injectionBinder.GetInstance<StartSignal>();
         startSignal.Dispatch();
         return this;
     }
@@ -52,7 +52,7 @@ public class GameContext : MVCSContext
 #endif
 
 
-        injectionBinder.Bind<IDataStorageDriver>().To<PlayerPrefsStorageDriver>();
+        injectionBinder.Bind<IDataStorageDriver>().To<PlayerPrefsStorageDriver>().ToSingleton();
         
         
         //Services
@@ -73,6 +73,7 @@ public class GameContext : MVCSContext
         mediationBinder.Bind<Player>().To<PlayerMediator>();
         mediationBinder.Bind<HudView>().To<HudMediator>();
         mediationBinder.Bind<StartMenuView>().To<StartMenuMediator>();
+        mediationBinder.Bind<BallView>().To<BallMediator>();
         
         
         // Commands

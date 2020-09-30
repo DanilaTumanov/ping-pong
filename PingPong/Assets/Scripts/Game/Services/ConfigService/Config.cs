@@ -1,4 +1,5 @@
-﻿using Game.Gameplay.GameEntities;
+﻿using Game.Gameplay;
+using Game.Gameplay.GameEntities;
 using Game.Gameplay.GameEntities.Balls;
 using UnityEngine;
 
@@ -9,6 +10,12 @@ namespace Game.Services.ConfigService
     {
 
         public Ball[] ballsPrefabs;
+
+        public Player playerPrefab;
+
+        public string playerPrefabResourceFolder;
+        
+        public string ballsPrefabsResourceFolder;
 
     }
 }

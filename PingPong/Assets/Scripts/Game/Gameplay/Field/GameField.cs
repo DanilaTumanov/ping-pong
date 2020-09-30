@@ -51,25 +51,36 @@ namespace Game.Gameplay.Field
         }
         
 
-        public void PlacePlayers(Player player1, Player player2)
+        public void PlacePlayers(Player player, bool isMasterClient)
         {
-            if (_bounceBoundsPair == BoundsPairs.LeftRight)
+            if (isMasterClient)
             {
-                player1.transform.localPosition = new Vector3(0, Bounds.min.y + _playerOffset, 0);
-                player1.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-                player2.transform.localPosition = new Vector3(0, Bounds.max.y - _playerOffset, 0);
-                player2.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.down);
+                if (_bounceBoundsPair == BoundsPairs.LeftRight)
+                {
+                    player.transform.localPosition = new Vector3(0, Bounds.min.y + _playerOffset, 0);
+                    player.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+                }
+                else
+                {
+                    player.transform.localPosition = new Vector3(Bounds.min.x + _playerOffset, 0, 0);
+                    player.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.right);
+                }
             }
             else
             {
-                player1.transform.localPosition = new Vector3(Bounds.min.x + _playerOffset, 0, 0);
-                player1.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.right);
-                player2.transform.localPosition = new Vector3(Bounds.max.x - _playerOffset, 0, 0);
-                player2.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.left);
+                if (_bounceBoundsPair == BoundsPairs.LeftRight)
+                {
+                    player.transform.localPosition = new Vector3(0, Bounds.max.y - _playerOffset, 0);
+                    player.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.down);
+                }
+                else
+                {
+                    player.transform.localPosition = new Vector3(Bounds.max.x - _playerOffset, 0, 0);
+                    player.transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.left);
+                }
             }
             
-            player1.SetRestrictedArea(this);
-            player2.SetRestrictedArea(this);
+            player.SetRestrictedArea(this);
         }
 
 

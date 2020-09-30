@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Gameplay;
 using Game.Services.InputService;
+using Photon.Pun;
 using strange.extensions.mediation.impl;
 
 namespace Game.Mediators
@@ -17,9 +18,9 @@ namespace Game.Mediators
 
         private void Update()
         {
-            if (_inputController.IsSwipe)
+            if (_inputController.IsSwipe && View.PlayerPhoton.IsMine)
             {
-                View.Move(_inputController.SwipeVector);
+                View.Move((PhotonNetwork.IsMasterClient ? 1 : -1) * _inputController.SwipeVector);
             }
         }
     }

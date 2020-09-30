@@ -15,14 +15,16 @@ namespace Game.Services.NetworkService
 
         private readonly IRuntimeService _runtimeService;
         private readonly PhotonCallbacksClient _photonClient;
-
+        
         private Task _connectionTask;
 
 
         public Player LocalPlayer => PhotonNetwork.LocalPlayer;
-        
-        
+        public bool IsMasterClient => PhotonNetwork.IsMasterClient;
+
+
         public event Action<Player> OnPlayerConnected;
+
         public event Action<Player> OnPlayerDisconnected;
 
 
@@ -30,7 +32,7 @@ namespace Game.Services.NetworkService
         {
             _runtimeService = runtimeService;
             _photonClient = runtimeService.RegisterClient<PhotonCallbacksClient>();
-
+            
             _photonClient.OnPlayerConnected += p => OnPlayerConnected?.Invoke(p);
             _photonClient.OnPlayerDisconnected += p => OnPlayerDisconnected?.Invoke(p);
             
@@ -85,6 +87,16 @@ namespace Game.Services.NetworkService
         public Task LeaveGame()
         {
             throw new System.NotImplementedException();
+        }
+
+        public T Instantiate<T>(string prefabPath, Vector3 position, Quaternion rotation) where T : MonoBehaviour
+        {
+            return PhotonNetwork.Instantiate(prefabPath, Vector3.zero, Quaternion.identity).GetComponent<T>();
+        }
+
+        public void Destroy(PhotonView networkObject)
+        {
+            PhotonNetwork.Destroy(networkObject);
         }
     }
 }

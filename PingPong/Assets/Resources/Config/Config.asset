@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   ballsPrefabs:
-  - {fileID: 665271144, guid: afd2d5621ab9e5d47a85bdfdee5fed85, type: 3}
-  - {fileID: 7679286867028235049, guid: 8b30ca372c712a847869b355541d35d2, type: 3}
-  - {fileID: 7679286867028235049, guid: afdabed30e75c9d408cea29f6da3bb79, type: 3}
-  - {fileID: 2693390897098610872, guid: 21d5be4e5313b364eb4949aaef6b04de, type: 3}
+  - {fileID: 5158048961141844764, guid: 96d32c87e0a59d4409d456581c40451c, type: 3}
+  - {fileID: 5493344595248793800, guid: 70eb8c5513e3e324ca74cec4b49b2804, type: 3}
+  - {fileID: 9040817027924978786, guid: 908c4a0ab13a3124b843ee52c01aff5d, type: 3}
+  - {fileID: 3032873627541095719, guid: 26489ab6f0b383f4599efb7c8e9f9d35, type: 3}
+  playerPrefab: {fileID: 705201141, guid: e13c27fa5f649ae41817036ec8eb9ff1, type: 3}
+  playerPrefabResourceFolder: Prefabs
+  ballsPrefabsResourceFolder: Prefabs/Balls

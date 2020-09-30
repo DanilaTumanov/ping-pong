@@ -3,10 +3,12 @@ using Game.Gameplay;
 using Game.Gameplay.GameEntities;
 using Game.Gameplay.GameEntities.Balls;
 using Game.Models;
+using Game.Services;
 using Game.Services.ConfigService;
 using Game.Services.InputService;
 using Game.Services.UserDataService;
 using Game.Signals;
+using Photon.Pun;
 using strange.extensions.mediation.impl;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -23,39 +25,59 @@ namespace Game.Mediators
         public IConfigService ConfigService { get; set; }
         
         [Inject]
-        public OutSignal OutSignal { get; set; }
-
+        public INetworkService NetworkService { get; set; }
+        
         [Inject]
-        public HitSignal HitSignal { get; set; }
+        public INetworkModel NetworkModel { get; set; }
+        
+        [Inject]
+        public OutSignal OutSignal { get; set; }
+        
+        
         
 
         public override void OnRegister()
         {
             base.OnRegister();
 
-            View.OnOut += OutHandler;
-            View.OnHit += HitHandler;
-            //View.BallInPlay(GetRandomBall());
+            OutSignal.AddListener(OutHandler);
+            
+            NetworkModel.Opponent.OnChanged += OnNewOpponentHandler;
         }
 
         private Ball GetRandomBall()
         {
-            return Instantiate(
-                ConfigService.Config.ballsPrefabs[
+            return NetworkService.Instantiate<Ball>(
+                ConfigService.Config.ballsPrefabsResourceFolder + "/" 
+              + ConfigService.Config.ballsPrefabs[
                     Random.Range(0, ConfigService.Config.ballsPrefabs.Length)
-                ]
+                ].name,
+                Vector3.zero,
+                Quaternion.identity
             );
         }
 
         private void OutHandler()
         {
-            OutSignal.Dispatch();
-            View.BallInPlay(GetRandomBall());
+            if (NetworkService.IsMasterClient)
+            {
+                Debug.Log("New ball");
+                View.BallInPlay(GetRandomBall());
+            }
         }
 
-        private void HitHandler()
+        private void OnNewOpponentHandler(Photon.Realtime.Player oldOpponent, Photon.Realtime.Player newOpponent)
         {
-            HitSignal.Dispatch();
+            var player = NetworkService.Instantiate<Player>(
+                ConfigService.Config.playerPrefabResourceFolder + "/" + ConfigService.Config.playerPrefab.name,
+                Vector3.zero,
+                Quaternion.identity
+            );
+ 
+            View.SetPlayer(player, NetworkService.IsMasterClient);
+            
+            if(NetworkService.IsMasterClient)
+                View.BallInPlay(GetRandomBall());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Game.Services.RuntimeService;
+﻿using Game.Services.NetworkService;
+using Game.Services.RuntimeService;
 using Game.Services.UserDataService;
 
 namespace Game.Models

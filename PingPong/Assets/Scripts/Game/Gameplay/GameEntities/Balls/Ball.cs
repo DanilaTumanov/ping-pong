@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Gameplay.InteractionInterfaces;
+using Photon.Pun;
 using strange.extensions.mediation.impl;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Game.Gameplay.GameEntities.Balls
  
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Ball : View, IHitable, IOutObject
+    public class Ball : MonoBehaviour, IHitable, IOutObject
     {
         private const float SPEED_THRESHOLD = 0.01f;
         
@@ -22,18 +23,18 @@ namespace Game.Gameplay.GameEntities.Balls
 
         public Bounds Bounds { get; }
 
-
+        
         public event Action OnBallOut;
         public event Action OnBallHit;
 
 
-        protected override void Awake()
-        {
-            base.Awake();
 
+        protected void Awake()
+        {
             _rb = GetComponent<Rigidbody2D>();
         }
-
+        
+        
         private void FixedUpdate()
         {
             if (_rb.velocity.sqrMagnitude > SPEED_THRESHOLD)
@@ -42,7 +43,8 @@ namespace Game.Gameplay.GameEntities.Balls
             }
         }
 
-        public void Go(Vector2 direction)
+        
+        public void Init(Vector2 direction)
         {
             _rb.AddForce(_speed * _rb.mass * direction, ForceMode2D.Impulse);
         }
@@ -50,12 +52,12 @@ namespace Game.Gameplay.GameEntities.Balls
         public void Out()
         {
             OnBallOut?.Invoke();
-            Destroy(gameObject);
         }
         
         public virtual void Hit(Vector3 point, Vector3 normal)
         {
             OnBallHit?.Invoke();
         }
+        
     }
 }

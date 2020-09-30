@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -51,8 +52,7 @@ namespace Game.Services.NetworkService
             
             var roomOptions = new RoomOptions
             {
-                MaxPlayers = 2,
-                EmptyRoomTtl = 60000
+                MaxPlayers = 2
             };
 
             PhotonNetwork.JoinOrCreateRoom(name, roomOptions, TypedLobby.Default);

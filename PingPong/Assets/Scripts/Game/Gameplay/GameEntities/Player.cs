@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Gameplay.GameEntities;
 using strange.extensions.mediation.impl;
 using UnityEngine;
 
@@ -9,19 +10,21 @@ namespace Game.Gameplay
     {
         
         [SerializeField] private BoxCollider2D _collider;
+        [SerializeField] private PlayerPhoton _playerPhoton;
 
         private IRestrictedArea _restrictedArea;
         private Vector3 _oldPos;
         
         public Transform Transform => transform;
         public Bounds Bounds => _collider.bounds;
+        public PlayerPhoton PlayerPhoton => _playerPhoton;
 
 
         protected override void Awake()
         {
             _oldPos = transform.position;
         }
-
+        
         public void SetRestrictedArea(IRestrictedArea area)
         {
             _restrictedArea = area;
