@@ -3,6 +3,7 @@ using Game.Gameplay;
 using Game.Services.InputService;
 using Photon.Pun;
 using strange.extensions.mediation.impl;
+using UnityEngine;
 
 namespace Game.Mediators
 {
@@ -16,11 +17,19 @@ namespace Game.Mediators
         public IInputController _inputController { get; set; }
 
 
+        private Camera _cam;
+
+
+        private void Awake()
+        {
+            _cam = Camera.main;
+        }
+
         private void Update()
         {
             if (_inputController.IsSwipe && View.PlayerPhoton.IsMine)
             {
-                View.Move((PhotonNetwork.IsMasterClient ? 1 : -1) * _inputController.SwipeVector);
+                View.Move((PhotonNetwork.IsMasterClient ? 1 : -1) * _cam.orthographicSize * 2 * _inputController.SwipeVector);
             }
         }
     }
