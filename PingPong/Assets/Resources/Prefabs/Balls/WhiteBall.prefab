@@ -29,7 +29,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4143098358384953792}
+  m_Father: {fileID: 6047613816856927087}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &6460536448977077911
@@ -62,6 +62,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,6 +74,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -102,7 +104,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4143098358384953523}
+  m_GameObject: {fileID: 6047613816856927086}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03e40f0e642a32745a4106d71abcf894, type: 3}
@@ -116,6 +118,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6339846314563615433, guid: 30438d4036531a648a41fb059b27a0a1,
+        type: 3}
+      propertyPath: _ball
+      value: 
+      objectReference: {fileID: 3032873627541095719}
     - target: {fileID: 7679286867028235044, guid: 30438d4036531a648a41fb059b27a0a1,
         type: 3}
       propertyPath: m_Name
@@ -176,20 +183,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6339846314563615433, guid: 30438d4036531a648a41fb059b27a0a1,
-        type: 3}
-      propertyPath: _ball
-      value: 
-      objectReference: {fileID: 3032873627541095719}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30438d4036531a648a41fb059b27a0a1, type: 3}
---- !u!1 &4143098358384953523 stripped
+--- !u!1 &6047613816856927086 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7679286867028235044, guid: 30438d4036531a648a41fb059b27a0a1,
     type: 3}
   m_PrefabInstance: {fileID: 4143098358384953418}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4143098358384953792 stripped
+--- !u!4 &6047613816856927087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7679286867028235045, guid: 30438d4036531a648a41fb059b27a0a1,
     type: 3}

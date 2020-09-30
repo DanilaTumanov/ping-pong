@@ -28,8 +28,6 @@ namespace Game.Mediators
 
             View.OnBallHit += HitHandler;
             View.OnBallOut += OutHandler;
-            
-            Debug.Log("Ball mediator register");
         }
 
         private void HitHandler()
@@ -40,11 +38,9 @@ namespace Game.Mediators
         private void OutHandler()
         {
             OutSignal.Dispatch();
-            Debug.Log("Out Handler");
 
             if (NetworkService.IsMasterClient)
             {
-                Debug.Log("Destroy ball");
                 NetworkService.Destroy(View.BallPhoton);
             }
         }
