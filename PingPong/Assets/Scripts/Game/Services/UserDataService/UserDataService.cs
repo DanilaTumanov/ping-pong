@@ -25,57 +25,53 @@ namespace Game.Services.UserDataService
         {
             foreach (var savePropertyData in GetSaveProperties(userDataObject))
             {
-                if (savePropertyData.propertyInfo.PropertyType == typeof(int))
-                {
-                    Load(savePropertyData, _dataStorageDriver.LoadInt);
-                }
-                else if (savePropertyData.propertyInfo.PropertyType == typeof(float))
-                {
-                    Load(savePropertyData, _dataStorageDriver.LoadFloat);
-                }
-                else if (savePropertyData.propertyInfo.PropertyType == typeof(string))
-                {
-                    Load(savePropertyData, _dataStorageDriver.LoadString);
-                }
+                var loaded = TryLoad(savePropertyData, _dataStorageDriver.LoadInt)
+                          || TryLoad(savePropertyData, _dataStorageDriver.LoadFloat)
+                          || TryLoad(savePropertyData, _dataStorageDriver.LoadString);
             }
         }
 
-        private void Load<T>(SavePropertyData data, Func<string, T> loader)
+        private bool TryLoad<T>(SavePropertyData data, Func<string, T> loader)
         {
-            data.propertyInfo.SetValue(
-                data.contextPropertyInstance,
-                loader(data.name)
-            );
+            var typeMatch = data.propertyInfo.PropertyType == typeof(T);
+            
+            if (typeMatch)
+            {
+                data.propertyInfo.SetValue(
+                    data.contextPropertyInstance,
+                    loader(data.name)
+                );
+            }
+
+            return typeMatch;
         }
 
         public void Save(object userDataObject)
         {
             foreach (var savePropertyData in GetSaveProperties(userDataObject))
             {
-                if (savePropertyData.propertyInfo.PropertyType == typeof(int))
-                {
-                    Save<int>(savePropertyData, _dataStorageDriver.SaveInt);
-                }
-                else if (savePropertyData.propertyInfo.PropertyType == typeof(float))
-                {
-                    Save<float>(savePropertyData, _dataStorageDriver.SaveFloat);
-                }
-                else if (savePropertyData.propertyInfo.PropertyType == typeof(string))
-                {
-                    Save<string>(savePropertyData, _dataStorageDriver.SaveString);
-                }
+                var saved = TrySave<int>(savePropertyData, _dataStorageDriver.SaveInt)
+                         || TrySave<float>(savePropertyData, _dataStorageDriver.SaveFloat)
+                         || TrySave<string>(savePropertyData, _dataStorageDriver.SaveString);
+                
             }
-            
         }
         
-        private void Save<T>(SavePropertyData data, Action<string, T> saver)
+        private bool TrySave<T>(SavePropertyData data, Action<string, T> saver)
         {
-            saver(
-                data.name,
-                (T) data.propertyInfo.GetValue(
-                    data.contextPropertyInstance
-                )
-            );
+            var typeMatch = data.propertyInfo.PropertyType == typeof(T);
+            
+            if (typeMatch)
+            {
+                saver(
+                    data.name,
+                    (T) data.propertyInfo.GetValue(
+                        data.contextPropertyInstance
+                    )
+                );
+            }
+
+            return typeMatch;
         }
 
 
