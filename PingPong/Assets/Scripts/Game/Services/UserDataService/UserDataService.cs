@@ -81,29 +81,20 @@ namespace Game.Services.UserDataService
                                  .GetProperties()
                                  .Where(prop =>
                                  {
-                                     var savableProp = prop.GetCustomAttribute(typeof(Save));
-                                     var isContextProperty = false;
-
-                                     if (prop.PropertyType.IsGenericType)
-                                     {
-                                         if (prop.PropertyType.GetGenericTypeDefinition()
-                                          == typeof(ContextProperty<>))
-                                         {
-                                             isContextProperty = true;
-                                         }
-                                     }
-
-                                     return savableProp != null && isContextProperty;
+                                     var savableProp = prop.GetCustomAttribute(typeof(Save)) != null;
+                                     var isContextProperty = prop.PropertyType.IsGenericType 
+                                                          && prop.PropertyType.GetGenericTypeDefinition()
+                                                          == typeof(ContextProperty<>);
+                                     
+                                     return savableProp && isContextProperty;
                                  })
-                                 .Select(prop =>
-                                 {
-                                     return new SavePropertyData
+                                 .Select(prop => new SavePropertyData
                                      {
                                          name = prop.Name,
                                          contextPropertyInstance = prop.GetValue(userDataObject),
                                          propertyInfo = prop.PropertyType.GetProperty("Value")
-                                     };
-                                 });
+                                     }
+                                 );
         }
     }
 
